@@ -1,0 +1,45 @@
+/* Membuat Variabel Warna Anjem UNNES */
+:root {
+    --biru-unnes: #1E3A8A;
+    --kuning-btn: #FFD700;
+    --merah-alert: #DC2626;
+    --putih-bersih: #FFFFFF;
+    --bg-abu: #F3F4F6; /* Warna latar belakang agar warna putih bisa menonjol */
+}
+
+/* Mengatur dasar halaman */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-abu);
+    color: #333;
+}
+
+/* --- Komponen UI --- */
+.navbar {
+    background-color: var(--biru-unnes);
+    color: var(--putih-bersih);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar h2 {
+    margin: 0;
+}
+
+.btn-utama {
+    background-color: var(--kuning-btn);
+    color: var(--biru-unnes);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-utama:hover {
+    background-color: #e6c200; /* Kuning sedikit lebih gelap saat disentuh */
+}
