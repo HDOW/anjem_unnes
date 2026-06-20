@@ -1,6 +1,6 @@
 <div style="padding: 20px; max-width: 1000px; margin: 0 auto; display: flex; gap: 20px; flex-wrap: wrap;">
     
-    <div style="flex: 1; min-width: 300px; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-height: 450px;">
+    <div style="flex: 1;min-width: 300px;background: white;padding: 30px;border-radius: 10px;box-shadow: 0 4px 6px rgba(0,0,0,0.1);/* max-height: 450px; */">
         <div style="text-align: center;">
             <img src="<?= BASEURL; ?>/assets/img/<?= $data['profil']['foto_profil']; ?>" width="120" height="120" style="border-radius: 50%; object-fit: cover; border: 4px solid var(--biru-unnes);">
             <h3 style="margin-bottom: 0; margin-top: 15px;"><?= $data['profil']['nama']; ?></h3>
@@ -8,8 +8,13 @@
         </div>
 
         <div style="border-top: 2px solid #eee; margin-top: 20px; padding-top: 15px;">
-            <p><strong>Kendaraan:</strong> <?= $data['profil']['jenis_motor']; ?> (<span style="color: red; font-weight: bold;"><?= $data['profil']['plat_nomor']; ?></span>)</p>
-            
+            <p style="margin-bottom: 5px;"><strong>Kendaraan    :</strong> <?= $data['profil']['jenis_motor']; ?></p>
+<p style="margin-top: 0;"><strong>Plat Nomor:</strong> <span style="color: red; font-weight: bold;"><?= $data['profil']['plat_nomor']; ?></span></p>
+            <div style="margin-top: 15px;">
+            <a href="<?= BASEURL; ?>/driver/edit" style="display: block; width: 100%; text-align: center; background-color: #005097; color: white; padding: 10px 0; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 14px;">
+                <i class="fas fa-edit"></i> Edit Profil
+            </a>
+        </div>
             <div style="margin: 15px 0; background: #f9f9f9; padding: 10px; border-radius: 5px; font-size: 14px;">
                 Status Anda: 
                 <strong style="color: <?php 

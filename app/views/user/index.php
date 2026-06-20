@@ -171,9 +171,20 @@
     
     <!-- KARTU PROFIL (KIRI) -->
     <div class="profile-card">
-        <div class="profile-avatar">👤</div>
-        <h3><?= $_SESSION['nama']; ?></h3>
+        <?php if(!empty($data['profil']['foto_profil']) && $data['profil']['foto_profil'] != 'default.jpg') : ?>
+            <img src="<?= BASEURL; ?>/assets/img/<?= $data['profil']['foto_profil']; ?>" class="profile-avatar" style="object-fit: cover; border: 3px solid var(--biru-unnes); padding: 0;">
+        <?php else : ?>
+            <div class="profile-avatar">👤</div>
+        <?php endif; ?>
+        
+        <h3><?= $data['profil']['nama']; ?></h3>
         <div class="status-badge"><?= $_SESSION['role']; ?></div>
+        
+        <div style="margin-top: 15px;">
+            <a href="<?= BASEURL; ?>/user/edit" style="display: inline-block; background-color: #1e3a8a; color: white; padding: 8px 20px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 14px;">
+                Edit Profil
+            </a>
+        </div>
     </div>
 
     <!-- AREA DRIVER AKTIF (KANAN) -->

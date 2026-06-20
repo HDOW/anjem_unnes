@@ -31,4 +31,29 @@ class Driver_model {
                           WHERE tb_driver.status IN ('Ready', 'Still Deliver')");
         return $this->db->all();
     }
+    // Menambahkan fungsi update profil ke database
+    public function updateDataProfil($data) {
+        // 1. Update nama di tabel tb_user
+        $this->db->query("UPDATE tb_user SET nama = :nama WHERE id_user = :id_user");
+        $this->db->bind('nama', $data['nama']);
+        $this->db->bind('id_user', $data['id_user']);
+        $this->db->execute();
+
+        // 2. Update motor, plat, dan foto di tabel tb_driver
+        // Cek apakah ada foto baru yang diunggah
+        if($data['foto_profil'] != '') {
+            $this->db->query("UPDATE tb_driver SET jenis_motor = :jenis_motor, plat_nomor = :plat_nomor, foto_profil = :foto_profil WHERE id_user = :id_user");
+            $this->db->bind('foto_profil', $data['foto_profil']);
+        } else {
+            // Jika foto kosong, update teksnya saja
+            $this->db->query("UPDATE tb_driver SET jenis_motor = :jenis_motor, plat_nomor = :plat_nomor WHERE id_user = :id_user");
+        }
+        
+        $this->db->bind('jenis_motor', $data['jenis_motor']);
+        $this->db->bind('plat_nomor', $data['plat_nomor']);
+        $this->db->bind('id_user', $data['id_user']);
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
 }
