@@ -1,19 +1,34 @@
 <style>
     /* --- CSS Bagian Atas (Hero Rata Tengah) --- */
+    /* --- CSS Bagian Atas (Hero Rata Tengah) --- */
+   /* --- CSS Bagian Atas (Hero Rata Tengah) --- */
     .hero-text-section {
         min-height: 60vh; 
         display: flex;
-        align-items: center;
+        
+        /* 1. UBAH INI: Biarkan teks mulai dari atas, jangan dipaksa ke tengah */
+        align-items: flex-start; 
+        
         justify-content: center;
         max-width: 1000px;
         margin: 0 auto;
-        padding: 40px 20px;
+        
+        /* 2. Jarak PASTI dari navbar ke tulisan (Bisa dinaikkan jadi 120px jika kurang) */
+        padding-top: 100px; 
+        padding-bottom: 50px;
     }
 
     .hero-content {
         max-width: 700px; 
         text-align: center;
         margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        /* 3. TAMBAHKAN INI: Dorongan ekstra dari atas untuk berjaga-jaga */
+        margin-top: 150px; 
+        margin-bottom: 100px; 
     }
 
     .hero-content h1 {
@@ -21,14 +36,15 @@
         font-size: 48px;
         line-height: 1.2;
         margin-top: 0;
-        margin-bottom: 20px;
+        margin-bottom: 25px; 
     }
 
     .hero-content p {
         color: #555;
         font-size: 18px;
         line-height: 1.6;
-        margin-bottom: 35px;
+        margin-top: 0;
+        margin-bottom: 35px; 
     }
 
     .btn-mulai {
@@ -235,12 +251,14 @@
 <!-- ========================================== -->
 <!-- BAGIAN 1: HERO SECTION                     -->
 <!-- ========================================== -->
-<div class="hero-text-section">
-    <div class="hero-content">
-        <h1>Selamat Datang di Anjem UNNES!</h1>
-        <p>Solusi mobilitas dan jasa titip cepat untuk mahasiswa UNNES.</p>
+<div class="hero-content">
+    <h1>Selamat Datang di Anjem UNNES!</h1>
+    <p>Solusi mobilitas dan jasa titip cepat untuk mahasiswa UNNES.</p>
+    
+    <?php if( !isset($_SESSION['id_user']) ) : ?>
         <a href="<?= BASEURL; ?>/auth" class="btn-mulai">Mulai Sekarang</a>
-    </div>
+    <?php endif; ?>
+    
 </div>
 
 <!-- ========================================== -->
@@ -344,6 +362,36 @@
     <div style="text-align: center; margin-top: 100px; padding-bottom: 30px; font-size: 14px; color: #bbb;">
         
     </div>
+    
+    
+</div>
+
+<!-- ========================================== -->
+<!-- BAGIAN 4: PANEL KRITIK & SARAN             -->
+<!-- ========================================== -->
+<div class="section-kritik" style="max-width: 800px; margin: 80px auto 50px auto; padding: 30px; background-color: #F3F4F6; border-radius: 15px; text-align: center;">
+    <h2 style="color: var(--biru-unnes); margin-top: 0;">Kritik & Saran</h2>
+    <p style="color: #4B5563; font-size: 16px; margin-bottom: 25px; line-height: 1.6;">
+        Untuk kritik dan saran bisa langsung mengisi pada panel dibawah ini <br>
+        atau japri admin via WA : 
+        <strong><a href="https://wa.me/62895392943810?text=Halo%20min...👋%20aku%20dari%20web%20anjem%20mau%20ngasih%20kritik%20dan%20saran%20nihh!!!" target="_blank" style="color: #25D366; text-decoration: none;">+62 895-3929-43810</a>
+        <a href="https://wa.me/6281359916837?text=Halo%20min...👋%20aku%20dari%20web%20anjem%20mau%20ngasih%20kritik%20dan%20saran%20nihh!!!" target="_blank" style="color: #25D366; text-decoration: none;">+62 813-5991-6837</a></strong>
+    </p>
+
+    <!-- Form Input Pesan -->
+    <form action="<?= BASEURL; ?>/home/kirimPesan" method="POST" style="display: flex; flex-direction: column; gap: 15px; text-align: left;">
+        <div>
+            <label style="font-weight: bold; color: var(--biru-unnes); font-size: 14px;">Nama (User / Driver / Anonim)</label>
+            <input type="text" name="nama" placeholder="Masukkan nama Anda..." required style="width: 100%; padding: 12px; border: 1px solid #D1D5DB; border-radius: 8px; margin-top: 5px; box-sizing: border-box; font-family: inherit;">
+        </div>
+        <div>
+            <label style="font-weight: bold; color: var(--biru-unnes); font-size: 14px;">Pesan / Masukan</label>
+            <textarea name="pesan" rows="4" placeholder="Tulis keluhan, kritik, atau saran Anda di sini..." required style="width: 100%; padding: 12px; border: 1px solid #D1D5DB; border-radius: 8px; margin-top: 5px; box-sizing: border-box; font-family: inherit; resize: vertical;"></textarea>
+        </div>
+        <button type="submit" style="background-color: var(--biru-unnes); color: white; padding: 14px; border: none; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 10px;">
+            Kirim Pesan ke Admin
+        </button>
+    </form>
 </div>
 
 <!-- ========================================== -->

@@ -4,7 +4,9 @@ define('BASEURL', 'https://anjemunnes.my.id/');
 
 $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || ($_SERVER['SERVER_PORT'] ?? '') == 443 ? 'https' : 'http';
 $basePath = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
-define('BASEURL', $protocol . '://' . $_SERVER['HTTP_HOST'] . ($basePath === '' ? '' : $basePath));
+if (!defined('BASEURL')) {
+    define('BASEURL', 'https://anjemunnes.my.id'); // Sesuaikan dengan link asli kamu
+}
 
 // Data untuk menyambung ke database phpMyAdmin
 define('DB_HOST', 'localhost');

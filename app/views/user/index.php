@@ -246,7 +246,7 @@
                                 </div>
                             </div>
                             <div>
-                                <a href="<?= BASEURL; ?>/order/buat/${d.id_user}" class="btn-pesan">Pesan</a>
+                                <a href="<?= BASEURL; ?>/chat/index/${d.id_user}" class="btn-pesan">Pesan</a>
                             </div>
                         </div>
                     `;

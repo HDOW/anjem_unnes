@@ -4,6 +4,9 @@ class Admin extends Controller {
         // Halaman awal saat baru dibuka
         $data['users'] = $this->model('Admin_model')->getAllUser();
         $data['drivers'] = $this->model('Admin_model')->getAllDriver();
+        
+        // FUNGSI BARU: Menarik data pesan masuk dari tabel kritik_saran
+        $data['kritik'] = $this->model('Admin_model')->getAllKritikSaran();
 
         $this->view('templates/header');
         $this->view('admin/index', $data);
@@ -21,14 +24,16 @@ class Admin extends Controller {
         // Opsional: Pastikan yang mengakses ini benar-benar admin
         if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
             
-            // Tarik kedua data dari model
+            // Tarik data dari model
             $users = $this->model('Admin_model')->getAllUser();
             $drivers = $this->model('Admin_model')->getAllDriver();
+            $kritik = $this->model('Admin_model')->getAllKritikSaran(); // Menambahkan kritik ke fungsi live
 
             // Gabungkan menjadi satu paket array
             $paket_data = [
                 'users' => $users,
-                'drivers' => $drivers
+                'drivers' => $drivers,
+                'kritik' => $kritik
             ];
 
             // Kirim ke JavaScript dalam bahasa JSON
@@ -36,3 +41,4 @@ class Admin extends Controller {
         }
     }
 }
+?>

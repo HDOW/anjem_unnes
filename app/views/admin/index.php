@@ -41,6 +41,35 @@
     </div>
 </div>
 
+    <!-- ========================================== -->
+<!-- DAFTAR KRITIK DAN SARAN MASUK              -->
+<!-- ========================================== -->
+<div class="panel-pesan" style="margin-top: 50px; background-color: white; padding: 30px; border-radius: 15px; border: 1px solid #E5E7EB;">
+   <!-- ... kodingan atasnya ... -->
+    <h3 style="color: var(--biru-unnes); margin-top: 0; border-bottom: 2px solid #F3F4F6; padding-bottom: 15px;">
+        Kotak Masuk (Kritik & Saran)
+    </h3>
+    
+    <!-- TAMBAHKAN id="wadah-kritik" DI SINI -->
+    <div id="wadah-kritik" style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+        <?php if(empty($data['kritik'])) : ?>
+            <p style="color: #9CA3AF; font-style: italic;">Belum ada pesan masuk saat ini.</p>
+        <?php else : ?>
+            <?php foreach($data['kritik'] as $pesan) : ?>
+                <div style="background-color: #F9FAFB; padding: 20px; border-radius: 10px; border-left: 5px solid var(--kuning-btn);">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <strong style="color: #111827; font-size: 16px;"><?= $pesan['nama']; ?></strong>
+                        <span style="color: #6B7280; font-size: 13px;"><?= date('d M Y, H:i', strtotime($pesan['tanggal'])); ?></span>
+                    </div>
+                    <p style="margin: 0; color: #4B5563; line-height: 1.5; font-size: 15px;">
+                        "<?= $pesan['pesan']; ?>"
+                    </p>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
+</div>
+
 <script>
     function muatAdminLive() {
         // Mengambil paket data (User & Driver) dari server
@@ -96,6 +125,41 @@
                         `;
                     });
                 }
+                
+                const wadahKritik = document.getElementById('wadah-kritik');
+                
+                // Jika belum ada pesan sama sekali
+                if (data.kritik.length === 0) {
+                    wadahKritik.innerHTML = '<p style="color: #9CA3AF; font-style: italic;">Belum ada pesan masuk saat ini.</p>';
+                    return;
+                }
+
+                // Bersihkan isi div lama
+                let htmlBaru = '';
+
+                // Looping data pesan baru dari database
+                data.kritik.forEach(pesan => {
+                    // Konversi format waktu bawaan database ke format jam & tanggal Indonesia
+                    let waktu = new Date(pesan.tanggal);
+                    let formatWaktu = waktu.toLocaleDateString('id-ID', {day: '2-digit', month: 'short', year: 'numeric'}) + ', ' + waktu.toLocaleTimeString('id-ID', {hour: '2-digit', minute: '2-digit'});
+                    
+                    // Rangkai elemen HTML-nya
+                    htmlBaru += `
+                        <div style="background-color: #F9FAFB; padding: 20px; border-radius: 10px; border-left: 5px solid var(--kuning-btn);">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <strong style="color: #111827; font-size: 16px;">${pesan.nama}</strong>
+                                <span style="color: #6B7280; font-size: 13px;">${formatWaktu.replace(/\./g, ':')}</span>
+                            </div>
+                            <p style="margin: 0; color: #4B5563; line-height: 1.5; font-size: 15px;">
+                                "${pesan.pesan}"
+                            </p>
+                        </div>
+                    `;
+                });
+
+                // Suntikkan HTML baru ke dalam wadah layar Admin
+                wadahKritik.innerHTML = htmlBaru;
+            
             })
             .catch(error => console.error('Gagal memuat live data admin:', error));
     }
